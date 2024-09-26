@@ -5,19 +5,19 @@ import websocket
 
 def login():
     # Login endpoint
-    url = "http://localhost:8001/gotrade/v2/okx/credentials"
+    url = "http://localhost:8001/gotrade/v2/bybit/credentials"
     headers = {
         "Content-Type": "application/json",
         "Client-API-Key": "94fbcf0815d0ec8b292d61e805b7f83b"
     }
     data = {
-        "exchange": "OKX",
-        "name": "subaccount1",  # Replace 'subaccount1' with the actual account name you want to use
-        "key": "b3f1697c-e66e-4884-a8b3-5fd4d487fec5",
-        "secret": "3061E1679003AAD1A785CBF324899E5D",
-        "authenticate": True,
-        "passphrase": "Test@123"
-    }
+    "exchange": "BYBIT",
+    "name": "subaccount2",
+    "key":"60SXBFpOk33cbZhy5e",
+    "secret":"6VuHhiZWwlfWJ0YLuItJYotIaGCAWTykAHEd",
+    "authenticate": True,
+    "passphrase": ""
+}
 
     response = requests.post(url, headers=headers, json=data)
     if response.status_code == 200:
@@ -28,7 +28,7 @@ def login():
 
 def get_credentials():
     # Get credentials endpoint
-    url = "http://localhost:8001/gotrade/v2/okx/credentials"
+    url = "http://localhost:8001/gotrade/v2/bybit/credentials"
     headers = {
         "Content-Type": "application/json",
         "Client-API-Key": "94fbcf0815d0ec8b292d61e805b7f83b"
@@ -43,18 +43,18 @@ def get_credentials():
         # Access the 'data' key, which contains the list of credentials
         credentials = credentials_response.get("data", [])
 
-        # Find the first OKX credential
+        # Find the first bybit credential
         for credential in credentials:
             # Ensure each item is a dictionary
             if isinstance(credential, dict) and 'account_name' in credential and 'credential_id' in credential:
-                # Use the first valid OKX credential
+                # Use the first valid bybit credential
                 credential_id = credential["credential_id"]
                 account_name = credential["account_name"]
                 print(f"Account Name: {account_name}")
                 print(f"Credential ID: {credential_id}")
                 return credential_id, account_name
         
-        print("No valid OKX credentials found.")
+        print("No valid bybit credentials found.")
         sys.exit(1)
     else:
         print("Failed to retrieve credentials:", response.status_code, response.text)
@@ -62,7 +62,7 @@ def get_credentials():
 
 def place_orders(credential_id, account_name):
     # Place market orders
-    url = "http://localhost:8001/gotrade/v2/okx/order/place"
+    url = "http://localhost:8001/gotrade/v2/bybit/order/place"
     headers = {
         "Content-Type": "application/json",
         "Client-API-Key": "94fbcf0815d0ec8b292d61e805b7f83b"
@@ -71,7 +71,7 @@ def place_orders(credential_id, account_name):
     data = {
         "credential_id": credential_id,
         "algorithm_type": "PLACE",
-        "exchange": "OKX",
+        "exchange": "BYBIT",
         "account": account_name,
         "symbol": "SOL-USDT",
         "quantity": 1,
@@ -86,12 +86,12 @@ def place_orders(credential_id, account_name):
         print(response.status_code)
         print(response.json())
 
-    # Place a TWAP algo to sell 10 shares of SOL-USDT on OKX over 10 seconds
+    # Place a TWAP algo to sell 10 shares of SOL-USDT on bybit over 10 seconds
     print("Placing TWAP algo")
     data = {
         "credential_id": credential_id,
         "algorithm_type": "PLACE",
-        "exchange": "OKX",
+        "exchange": "BYBIT",
         "account": account_name,
         "symbol": "SOL-USDT",
         "quantity": 10,
@@ -107,7 +107,7 @@ def place_orders(credential_id, account_name):
 
 def get_holdings(credential_id):
     # Endpoint to get holdings
-    url = f"http://localhost:8001/gotrade/v2/okx/{credential_id}/holdings"
+    url = f"http://localhost:8001/gotrade/v2/bybit/{credential_id}/holdings"
     headers = {
         "Client-API-Key": "94fbcf0815d0ec8b292d61e805b7f83b"
     }
@@ -132,7 +132,7 @@ def on_open(ws):
     print("WebSocket connection opened.")
 
 def setup_websocket(credential_id):
-    ws_url = f"ws://localhost:8001/ws/gotrade/v2/okx/{credential_id}/orders"
+    ws_url = f"ws://localhost:8001/ws/gotrade/v2/bybit/{credential_id}/orders"
     ws = websocket.WebSocketApp(ws_url,
                                 on_open=on_open,
                                 on_message=on_message,
