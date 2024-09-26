@@ -16,7 +16,9 @@ def login():
     "key":"60SXBFpOk33cbZhy5e",
     "secret":"6VuHhiZWwlfWJ0YLuItJYotIaGCAWTykAHEd",
     "authenticate": True,
-    "passphrase": ""
+    "passphrase": "",
+    "mode": ""
+
 }
 
     response = requests.post(url, headers=headers, json=data)

@@ -16,7 +16,9 @@ def login():
     "key":"ZRwwhzywdVs69UFC3kAvlbJDJC0JIUyjpcrFeKBFhAlhg5ZtB84GbzDE7QNrI3dc",
     "secret":"-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIFYbiuj3IZZHMDw+uVbLmAVOT0AJhTba/FpFpJVfVjaT\n-----END PRIVATE KEY-----",
     "authenticate":True,
-    "passphrase":"Goquanttech@1"
+    "passphrase":"Goquanttech@1",
+    "mode": ""
+
  
 }
 

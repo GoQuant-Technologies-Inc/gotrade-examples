@@ -17,7 +17,7 @@ def login():
     "secret":"UhwSj72E0mdx8prCz8XsaCsnBgAuUcJO8Ks28hzcUdDsPY936SEDDBjS3fIKsKcI",
     "authenticate":True,
     "passphrase":"Goquanttech@1",
-    "mode": ""
+    "mode": "PM"
 
 }
 

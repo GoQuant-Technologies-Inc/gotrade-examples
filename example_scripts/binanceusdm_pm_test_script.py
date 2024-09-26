@@ -5,20 +5,21 @@ import websocket
 
 def login():
     # Login endpoint
-    url = "http://localhost:8001/gotrade/v2/binancecoinm/credentials"
+    url = "http://localhost:8001/gotrade/v2/binanceusdm/credentials"
     headers = {
         "Content-Type": "application/json",
         "Client-API-Key": "94fbcf0815d0ec8b292d61e805b7f83b"
     }
     data = {
-    "exchange":"BINANCECOINM",
-    "name":"GQ_BINANCE_SYSTEM_4",
-    "key":"wHPYJIFqFwEi9gAwabORMKZr09EfJlSY1n7l5xhDfkVlgD9gIZb9aASYeChcIrJ6",
-    "secret":"UhwSj72E0mdx8prCz8XsaCsnBgAuUcJO8Ks28hzcUdDsPY936SEDDBjS3fIKsKcI",
+    "exchange":"BINANCEUSDM",
+    "name":"GQ_BINANCE_SELF_3",
+    "key":"ZRwwhzywdVs69UFC3kAvlbJDJC0JIUyjpcrFeKBFhAlhg5ZtB84GbzDE7QNrI3dc",
+    "secret":"-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIFYbiuj3IZZHMDw+uVbLmAVOT0AJhTba/FpFpJVfVjaT\n-----END PRIVATE KEY-----",
     "authenticate":True,
     "passphrase":"Goquanttech@1",
-    "mode": ""
+    "mode": "PM"
 
+ 
 }
 
 
@@ -31,7 +32,7 @@ def login():
 
 def get_credentials():
     # Get credentials endpoint
-    url = "http://localhost:8001/gotrade/v2/binancecoinm/credentials"
+    url = "http://localhost:8001/gotrade/v2/binanceusdm/credentials"
     headers = {
         "Content-Type": "application/json",
         "Client-API-Key": "94fbcf0815d0ec8b292d61e805b7f83b"
@@ -46,41 +47,41 @@ def get_credentials():
         # Access the 'data' key, which contains the list of credentials
         credentials = credentials_response.get("data", [])
 
-        # Find the first binancecoinm credential
+        # Find the first binanceusdm credential
         for credential in credentials:
             # Ensure each item is a dictionary
             if isinstance(credential, dict) and 'account_name' in credential and 'credential_id' in credential:
-                # Use the first valid binancecoinm credential
+                # Use the first valid binanceusdm credential
                 credential_id = credential["credential_id"]
                 account_name = credential["account_name"]
                 print(f"Account Name: {account_name}")
                 print(f"Credential ID: {credential_id}")
                 return credential_id, account_name
         
-        print("No valid binancecoinm credentials found.")
+        print("No valid binanceusdm credentials found.")
         sys.exit(1)
     else:
         print("Failed to retrieve credentials:", response.status_code, response.text)
         sys.exit(1)
 
 def place_orders(credential_id, account_name):
-    # Place limit orders
-    url = "http://localhost:8001/gotrade/v2/binancecoinm/order/place"
+    # Place market orders
+    url = "http://localhost:8001/gotrade/v2/binanceusdm/order/place"
     headers = {
         "Content-Type": "application/json",
         "Client-API-Key": "94fbcf0815d0ec8b292d61e805b7f83b"
     }
-    print("Placing limit algo")
+    print("Placing market algo")
     data = {
     "credential_id": credential_id,
-    "algorithm_type": "PLACE",
-    "exchange": "BINANCECOINM",
-    "account": account_name,
-    "symbol": "XRPUSDT", 
+    "algorithm_type": "PLACE", 
+    "exchange": "BINANCEUSDM", 
+    "account": account_name, 
+    "symbol": "EOSUSDT", 
     "side": "BUY", 
-    "quantity":15.0, 
-    "price": 0.46,
-    "type": "limit" 
+    "quantity": 15.0, 
+    "price": 0,
+    "type": "market" 
 }
 
     for i in range(10):
@@ -89,14 +90,14 @@ def place_orders(credential_id, account_name):
         print(response.status_code)
         print(response.json())
 
-    # Place a TWAP algo to sell 10 shares of XRPUSDT on binancecoinm over 10 seconds
+    # Place a TWAP algo to sell 10 shares of EOSUSDT on binanceusdm over 10 seconds
     print("Placing TWAP algo")
     data = {
         "credential_id": credential_id,
         "algorithm_type": "PLACE",
-        "exchange": "BINANCECOINM",
+        "exchange": "BINANCEUSDM",
         "account": account_name,
-        "symbol": "XRPUSDT",
+        "symbol": "EOSUSDT",
         "quantity": 10,
         "side": "SELL",
         "type": "twap",
@@ -110,7 +111,7 @@ def place_orders(credential_id, account_name):
 
 def get_holdings(credential_id):
     # Endpoint to get holdings
-    url = f"http://localhost:8001/gotrade/v2/binancecoinm/{credential_id}/holdings"
+    url = f"http://localhost:8001/gotrade/v2/binanceusdm/{credential_id}/holdings"
     headers = {
         "Client-API-Key": "94fbcf0815d0ec8b292d61e805b7f83b"
     }
@@ -135,7 +136,7 @@ def on_open(ws):
     print("WebSocket connection opened.")
 
 def setup_websocket(credential_id):
-    ws_url = f"ws://localhost:8001/ws/gotrade/v2/binancecoinm/{credential_id}/orders"
+    ws_url = f"ws://localhost:8001/ws/gotrade/v2/binanceusdm/{credential_id}/orders"
     ws = websocket.WebSocketApp(ws_url,
                                 on_open=on_open,
                                 on_message=on_message,
