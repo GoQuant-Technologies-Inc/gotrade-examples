@@ -12,11 +12,11 @@ def login():
     }
     data = {
     "exchange":"BINANCESPOT",
-    "name":"GQ_BINANCE_1",
-    "key":"PimG8Xn5KKh15Qty08jNCaoUCFbpTtmD6alKbTmmIGTVG4iSTUdvT7KEU8L3q3sr",
-    "secret":"-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIFYbiuj3IZZHMDw+uVbLmAVOT0AJhTba/FpFpJVfVjaT\n-----END PRIVATE KEY-----",
+    "name":"account_name",
+    "key":"binancespot_api_key",
+    "secret":"binancespot_secret",
     "authenticate":True,
-    "passphrase":"Goquanttech@1",
+    "passphrase":"binancespot_passphrase",
     "mode": ""
 
  

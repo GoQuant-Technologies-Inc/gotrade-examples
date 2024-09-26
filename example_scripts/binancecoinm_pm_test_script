@@ -12,11 +12,11 @@ def login():
     }
     data = {
     "exchange":"BINANCECOINM",
-    "name":"GQ_BINANCE_SYSTEM_4",
-    "key":"wHPYJIFqFwEi9gAwabORMKZr09EfJlSY1n7l5xhDfkVlgD9gIZb9aASYeChcIrJ6",
-    "secret":"UhwSj72E0mdx8prCz8XsaCsnBgAuUcJO8Ks28hzcUdDsPY936SEDDBjS3fIKsKcI",
+    "name":"account_name",
+    "key":"binancecoinm_pm_api_key",
+    "secret":"binancecoinm_pm_secret",
     "authenticate":True,
-    "passphrase":"Goquanttech@1",
+    "passphrase":"binancecoinm_pm_passphrase",
     "mode": "PM"
 
 }

@@ -12,9 +12,9 @@ def login():
     }
     data = {
     "exchange": "BYBIT",
-    "name": "subaccount2",
-    "key":"60SXBFpOk33cbZhy5e",
-    "secret":"6VuHhiZWwlfWJ0YLuItJYotIaGCAWTykAHEd",
+    "name": "account_name",
+    "key":"bybit_api_key",
+    "secret":"bybit_secret",
     "authenticate": True,
     "passphrase": "",
     "mode": ""

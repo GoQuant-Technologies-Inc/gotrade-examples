@@ -12,11 +12,11 @@ def login():
     }
     data = {
         "exchange": "OKX",
-        "name": "subaccount1",  # Replace 'subaccount1' with the actual account name you want to use
-        "key": "b3f1697c-e66e-4884-a8b3-5fd4d487fec5",
-        "secret": "3061E1679003AAD1A785CBF324899E5D",
+        "name": "account_name",  # Replace 'subaccount1' with the actual account name you want to use
+        "key": "okx_api_key",
+        "secret": "okx_secret",
         "authenticate": True,
-        "passphrase": "Test@123",
+        "passphrase": "okx_passphrase",
         "mode": ""
     }
 

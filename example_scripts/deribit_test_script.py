@@ -12,11 +12,11 @@ def login():
     }
     data = {
     "exchange": "DERIBIT",
-    "name": "test_net_keys",
-    "key": "2yJROmUE",
-    "secret": "gxoJptaol92AJJI46YMGeVJgCueHWQZlFjL92jjU5JQ",
+    "name": "account_name",
+    "key": "deribit_api_key",
+    "secret": "deribit_secret",
     "authenticate": True,
-    "passphrase": "Goquanttech@1",
+    "passphrase": "deribit_passphrase",
     "mode": ""
  
 }
